@@ -1,0 +1,26 @@
+specVersion: 0.0.4
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: GlpUSDCVault
+    network: arbitrum-one
+    source:
+      address: "0x2e2153Fd13459eBA1F277Ab9Acd624F045d676ce"
+      abi: GlpUSDCVault
+      startBlock: 18703807
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - CommitAndClose
+      abis:
+        - name: GlpUSDCVault
+          file: GlpUSDCVault/abis/GlpUSDCVault.json
+        - name: ERC20
+          file: GlpUSDCVault/abis/ERC20.json
+      eventHandlers:
+        - event: CommitAndClose(uint104,uint256,uint256,uint256,uint256,uint256)
+          handler: handleCommitAndClose
+      file: GlpUSDCVault/GlpUSDCVault.wasm
